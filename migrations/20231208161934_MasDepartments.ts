@@ -5,7 +5,7 @@ export async function up(knex: Knex): Promise<void> {
   if (!hasTable) {
     await knex.schema.createTable("MasDepartments", (table) => {
       table.string("DepartmentCode").primary().unique(); // 创建唯一的字符串主键列 'id'
-      table.string("DepartmentName");
+      table.string("DepartmentName").notNullable;
       table.timestamps(true, true);
     });
   }

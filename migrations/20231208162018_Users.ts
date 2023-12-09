@@ -5,11 +5,12 @@ export async function up(knex: Knex): Promise<void> {
   if (!hasTable) {
     await knex.schema.createTable("Users", (table) => {
       table.string("UserId").primary().unique();
-      table.string("UserName");
-      table.integer("DepartmentCode").unsigned();
-      table.foreign("DepartmentCode").references("MasDepartments");
-      table.integer("chance");
-      table.boolean("IsAdmin");
+      table.string("UserName").notNullable;
+      table.string("Password").notNullable;
+      table.string("DepartmentCode").unsigned();
+      table.foreign("DepartmentCode").references("MasDepartments").notNullable;
+      table.integer("chance").notNullable;
+      table.boolean("IsAdmin").notNullable;
       table.string("created_by");
       table.string("mod_by");
       table.timestamps(true, true);

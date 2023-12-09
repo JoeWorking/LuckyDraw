@@ -1,24 +1,63 @@
 import { Knex } from "knex";
 
-export async function seed(knex: Knex): Promise<void> {
-  // Deletes ALL existing entries
-  await knex("Users").del();
-  await knex("MasDepartment").del();
+exports.seed = async function(knex: Knex): Promise<void>  {
+  await knex("Users").truncate();
+  await knex("MasDepartments").truncate();
 
-  // Inserts seed entries
+  await knex("MasDepartments").insert([
+    {
+      DepartmentCode:"I.T",
+      DepartmentName:"Information Technology"
+    },
+    {
+      DepartmentCode:"INC",
+      DepartmentName:"Invesment Accounting"
+    }
+  ]);
+
   await knex("Users").insert([
     {
-      UserID: "joech",
-      UserName: "",
-      DepartmentCode: "",
-      chance: "",
+      UserId: "joech",
+      UserName: "Joe Chung",
+      Password:"joe6292001",
+      DepartmentCode: "I.T",
+      chance: "1",
       IsAdmin: true,
-      created_by: "",
-      mod_by: "",
-      created_at: "",
-      updated_at: "",
+      created_by: "system",
+      mod_by: "system",
+      created_at: new Date(),
+      updated_at: new Date()
     },
-    { id: 2, colName: "rowValue2" },
-    { id: 3, colName: "rowValue3" },
+    {
+      UserId: "james",
+      UserName: "James Lee",
+      Password:"123456",
+      DepartmentCode: "I.T",
+      chance: "1",
+      IsAdmin: true,
+      created_by: "system",
+      mod_by: "system",
+      created_at: new Date(),
+      updated_at: new Date()
+    },
+    {
+      UserId: "joey",
+      UserName: "Joey Li",
+      Password:"123456",
+      DepartmentCode: "INV",
+      chance: "1",
+      IsAdmin: true,
+      created_by: "system",
+      mod_by: "system",
+      created_at: new Date(),
+      updated_at: new Date()
+    },
   ]);
-}
+
+  // 插入其他表的种子数据
+  // ...
+
+  console.log("种子数据加载完成");
+};
+
+
