@@ -1,9 +1,10 @@
 import express, { Express, Request, Response, Router } from "express";
 import dotenv from "dotenv";
 import { usersModel } from "./Model/usersModel";
-import { UsersController } from "./Controller/usersController";
+
 import { CreateRoutesOptions } from "./Util/routesModel";
 import { createRouter } from "./Router/router";
+import { UsersController } from "./Controller/usersController";
 
 dotenv.config();
 
