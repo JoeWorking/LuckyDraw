@@ -3,7 +3,18 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const knexConfigs = require("../knexfile");
-const configMode = "development";
-const knexConfig = knexConfigs[configMode];
-export const knex = Knex(knexConfig);
+const knex = require("knex")({
+  client: "pg",
+  connection: {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+  },
+  pool: {
+    min: 2,
+    max: 10, // 将 max 值增加到 10
+  },
+});
+
+module.exports = knex;

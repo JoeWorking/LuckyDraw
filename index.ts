@@ -1,18 +1,18 @@
 import express, { Express, Request, Response, Router } from "express";
 import dotenv from "dotenv";
-import { usersModel } from "./Model/usersModel";
+import { UsersModel } from "./model/usersModel";
 
-import { CreateRoutesOptions } from "./Util/routesModel";
-import { createRouter } from "./Router/router";
-import { UsersController } from "./Controller/usersController";
+import { CreateRoutesOptions } from "./util/routesModel";
+import { createRouter } from "./router/router";
+import { UsersController } from "./controller/usersController";
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT;
-const knex = require("./Util/knex");
+const knex = require("./util/knex");
 
-let usersService = new usersModel(knex);
+let usersService = new UsersModel(knex);
 let usersController = new UsersController(usersService);
 let createRoutesOptions: CreateRoutesOptions = {
   app,

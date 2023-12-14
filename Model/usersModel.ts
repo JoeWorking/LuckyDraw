@@ -13,11 +13,15 @@ interface User {
   updated_at: Date;
 }
 
-export class usersModel {
-  constructor(private knex: Knex) {}
+export class UsersModel {
+  private knex: Knex;
 
+  constructor(knex: Knex) {
+    this.knex = knex;
+  }
   async getAllUsers(): Promise<User[]> {
     try {
+    
       const users = await this.knex.select("*").from("Users");
       return users;
     } catch (error) {

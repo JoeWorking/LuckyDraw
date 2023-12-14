@@ -1,5 +1,7 @@
 import { Application } from "express";
-import { UsersController } from "../Controller/UsersController";
+import { UsersController } from "../controller/usersController";
+
+
 
 export interface CreateRoutesOptions {
   app: Application;

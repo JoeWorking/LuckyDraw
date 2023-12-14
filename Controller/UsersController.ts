@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import fetch from "node-fetch";
-import { usersModel } from "../Model/usersModel";
+
+import { UsersModel } from "../model/usersModel";
 
 export class UsersController {
-  constructor(private usersModel: usersModel) {}
+  constructor(private usersModel: UsersModel) {}
 
   getAllUsers = async (req: Request, res: Response) => {
     try {
