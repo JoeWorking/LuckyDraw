@@ -36,6 +36,7 @@ export class UsersModel {
       this.knex.destroy();
     }
   }
+  
   async loginChecking(user_id: string): Promise<user[]> {
     try {
       const users = await this.knex("users")

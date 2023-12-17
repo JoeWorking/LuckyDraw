@@ -9,6 +9,8 @@ import { UsersController } from "./controller/usersController";
 dotenv.config();
 
 const app: Express = express();
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const port = process.env.PORT;
 const knex = require("./util/knex");
 
@@ -20,6 +22,13 @@ let createRoutesOptions: CreateRoutesOptions = {
 };
 
 createRouter(createRoutesOptions);
+
+app.use(cookieParser());
+app.use(session({
+  secret: 'ce_lucky_draw',
+  resave: false,
+  saveUninitialized: true,
+}));
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
