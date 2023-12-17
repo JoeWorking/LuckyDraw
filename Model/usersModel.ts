@@ -1,17 +1,18 @@
 import { Knex } from "knex";
 
-interface User {
-  UserId: string;
-  UserName: string;
-  Password: string;
-  DepartmentCode: string;
-  Chance: number;
-  IsAdmin: boolean;
+interface user {
+  user_id: string;
+  user_name: string;
+  password: string;
+  department_code: string;
+  chance: number;
+  is_admin: boolean;
   created_by: string;
   mod_by: string;
   created_at: Date;
   updated_at: Date;
 }
+
 
 export class UsersModel {
   private knex: Knex;
@@ -19,10 +20,12 @@ export class UsersModel {
   constructor(knex: Knex) {
     this.knex = knex;
   }
-  async getAllUsers(): Promise<User[]> {
+  async getAllUsers(): Promise<user[]> {
     try {
-    
-      const users = await this.knex.select("*").from("Users");
+
+      const users = await this.knex("users as u")
+        .select("u.user_id", "u.user_name", "u.password", "md.department_name", "u.chance")
+        .leftJoin("mas_departments as md", "u.department_code", "md.department_code");
       return users;
     } catch (error) {
       // Handle the error appropriately
@@ -33,11 +36,11 @@ export class UsersModel {
       this.knex.destroy();
     }
   }
-  async loginChecking(userId: string): Promise<User[]> {
+  async loginChecking(user_id: string): Promise<user[]> {
     try {
-      const users = await this.knex("Users")
+      const users = await this.knex("users")
         .select("*")
-        .where("userId", userId);
+        .where("user_id", user_id);
 
       return users;
     } catch (error) {

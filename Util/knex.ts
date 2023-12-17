@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+/** For knex select querry**/
 const knex = require("knex")({
   client: "pg",
   connection: {

@@ -1,16 +1,16 @@
 import type { Knex } from "knex";
 
 export async function up(knex: Knex): Promise<void> {
-  const hasTable = await knex.schema.hasTable("Users");
+  const hasTable = await knex.schema.hasTable("users");
   if (!hasTable) {
-    await knex.schema.createTable("Users", (table) => {
-      table.string("UserId").primary().unique();
-      table.string("UserName").notNullable;
-      table.string("Password").notNullable;
-      table.string("DepartmentCode").unsigned();
-      table.foreign("DepartmentCode").references("MasDepartments").notNullable;
+    await knex.schema.createTable("users", (table) => {
+      table.string("user_id").primary().unique();
+      table.string("user_name").notNullable;
+      table.string("password").notNullable;
+      table.string("department_code").unsigned();
+      table.foreign("departmentCode").references("mas_departments").notNullable;
       table.integer("chance").notNullable;
-      table.boolean("IsAdmin").notNullable;
+      table.boolean("is_admin").notNullable;
       table.string("created_by");
       table.string("mod_by");
       table.timestamps(true, true);
@@ -19,5 +19,5 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 export async function down(knex: Knex): Promise<void> {
-  await knex.schema.dropTableIfExists("Users");
+  await knex.schema.dropTableIfExists("users");
 }

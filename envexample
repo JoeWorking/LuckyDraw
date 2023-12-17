@@ -1,0 +1,6 @@
+PORT=8000
+DB_DATABASE=lucky_draw
+DB_USERNAME=postgres
+DB_PASSWORD=joe6292001
+NODE_ENV=development
+HOST=localhosts
